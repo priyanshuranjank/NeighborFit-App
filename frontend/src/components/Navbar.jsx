@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
-import { MapPin, Menu, X, User } from 'lucide-react';
+import { MapPin, Menu, X, User, LogOut } from 'lucide-react';
+import { LoginModal } from './LoginModal.jsx';
 
 export const Navbar = ({ currentPage, onNavigate }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
+  const [user, setUser] = useState(null);
 
   const navItems = [
     { name: 'Home', page: 'landing' },
@@ -18,6 +21,19 @@ export const Navbar = ({ currentPage, onNavigate }) => {
   const handleNavClick = (page) => {
     onNavigate(page);
     setIsMenuOpen(false);
+  };
+
+  const handleLogin = (userData) => {
+    setUser(userData);
+    setIsLoginModalOpen(false);
+  };
+
+  const handleLogout = () => {
+    setUser(null);
+  };
+
+  const openLoginModal = () => {
+    setIsLoginModalOpen(true);
   };
 
   return (
@@ -45,10 +61,28 @@ export const Navbar = ({ currentPage, onNavigate }) => {
                 {item.name}
               </button>
             ))}
-            <button className="bg-[#153e3b] text-[#ffffff] hover:bg-[#166d69] font-normal py-2 px-4 rounded-lg transition-colors duration-200 flex items-center">
-              <User className="h-4 w-4 mr-2" />
-              Login/Signup
-            </button>
+            {user ? (
+              <div className="flex items-center space-x-3">
+                <span className="text-sm text-[#153e3b] font-medium">
+                  Welcome, {user.name}!
+                </span>
+                <button 
+                  onClick={handleLogout}
+                  className="bg-red-600 text-[#ffffff] hover:bg-red-700 font-normal py-2 px-4 rounded-lg transition-colors duration-200 flex items-center"
+                >
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Logout
+                </button>
+              </div>
+            ) : (
+              <button 
+                onClick={openLoginModal}
+                className="bg-[#153e3b] text-[#ffffff] hover:bg-[#166d69] font-normal py-2 px-4 rounded-lg transition-colors duration-200 flex items-center"
+              >
+                <User className="h-4 w-4 mr-2" />
+                Login
+              </button>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -79,14 +113,39 @@ export const Navbar = ({ currentPage, onNavigate }) => {
                   {item.name}
                 </button>
               ))}
-              <button className="w-full bg-[#153e3b] text-[#ffffff] hover:bg-[#166d69] font-normal py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center mt-4">
-                <User className="h-4 w-4 mr-2" />
-                Login/Signup
-              </button>
+              {user ? (
+                <div className="mt-4 space-y-2">
+                  <div className="text-center text-sm text-[#153e3b] font-medium">
+                    Welcome, {user.name}!
+                  </div>
+                  <button 
+                    onClick={handleLogout}
+                    className="w-full bg-red-600 text-[#ffffff] hover:bg-red-700 font-normal py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center"
+                  >
+                    <LogOut className="h-4 w-4 mr-2" />
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <button 
+                  onClick={openLoginModal}
+                  className="w-full bg-[#153e3b] text-[#ffffff] hover:bg-[#166d69] font-normal py-2 px-4 rounded-lg transition-colors duration-200 flex items-center justify-center mt-4"
+                >
+                  <User className="h-4 w-4 mr-2" />
+                  Login
+                </button>
+              )}
             </div>
           </div>
         )}
       </div>
+      
+      {/* Login */}
+      <LoginModal 
+        isOpen={isLoginModalOpen}
+        onClose={() => setIsLoginModalOpen(false)}
+        onLogin={handleLogin}
+      />
     </nav>
   );
 }; 
