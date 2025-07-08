@@ -1,3 +1,6 @@
+> ⚠️ **Warning**  
+> Backend deployment may occasionally fail due to platform-related glitches or unexpected errors.
+
 # NeighborFit-App
 
 NeighborFit is a full-stack web application designed to help users find their ideal neighborhood based on personalized preferences. It features a modern React frontend and a robust Node.js/Express backend, implementing a sophisticated matching algorithm to provide tailored neighborhood recommendations.
@@ -6,6 +9,10 @@ NeighborFit is a full-stack web application designed to help users find their id
 
 Access the live application here: [https://neighbor-fit-app-phi.vercel.app/](https://neighbor-fit-app-phi.vercel.app/)
 
+## 📸 Some Screenshots
+![alt text](<Screenshot (119).png>)
+![alt text](<Screenshot (120).png>)
+![alt text](<Screenshot (121).png>)
 ## Table of Contents
 
 - [Features](#features)
