@@ -1,7 +1,7 @@
 // API service for frontend
 // It handles communication with the backend
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://neighborfit-backend-3nl9.onrender.com';
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://neighborfit-backend-h89d.onrender.com/';
 
 // Generic API request handler 
 // with error handling
